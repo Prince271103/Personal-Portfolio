@@ -17,6 +17,18 @@
   --card: #13131c;
 }
 
+/* Light theme overrides when `html.light` is present */
+html.light {
+  --bg: #f7fafc;
+  --surface: #ffffff;
+  --border: #e6e6ea;
+  --accent: #007a3d;
+  --accent2: #0ea5e9;
+  --text: #0b0b0d;
+  --muted: #6b7280;
+  --card: #f3f4f6;
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -28,6 +40,7 @@ body {
   font-size: 15px;
   line-height: 1.7;
   overflow-x: hidden;
+  transition: background-color 240ms ease, color 240ms ease;
 }
 
 /* Noise texture overlay */
@@ -136,6 +149,31 @@ nav {
 }
 .mobile-menu a:hover {
   color: var(--accent);
+}
+
+/* Theme toggle button */
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  margin-left: 0.75rem;
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--text);
+  cursor: pointer;
+  border-radius: 6px;
+  font-size: 16px;
+}
+.theme-toggle:hover {
+  background: rgba(255,255,255,0.03);
+  border-color: var(--border);
+}
+
+/* Slightly adjust hamburger icon color to follow variables */
+.hamburger span {
+  background: var(--text);
 }
 
 /* ── HERO ── */
