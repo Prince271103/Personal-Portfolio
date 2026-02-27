@@ -65,62 +65,21 @@ function handleSubmit(e) {
   }, 3000);
 }
 
-// Theme (light / dark) handling
-const themeToggle = document.getElementById("themeToggle");
+// Automatic theme: follow system `prefers-color-scheme` and update on changes
 const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
 
-function applyTheme(theme) {
-  if (theme === 'light') {
-    document.documentElement.classList.add('light');
-    themeToggle.textContent = '☀';
-  } else {
+function applyThemeAuto() {
+  if (mediaQuery.matches) {
     document.documentElement.classList.remove('light');
-    themeToggle.textContent = '🌙';
+  } else {
+    document.documentElement.classList.add('light');
   }
 }
 
-function getStoredTheme() {
-  try {
-    return localStorage.getItem('theme');
-  } catch (e) {
-    return null;
-  }
+applyThemeAuto();
+
+if (mediaQuery.addEventListener) {
+  mediaQuery.addEventListener('change', applyThemeAuto);
+} else if (mediaQuery.addListener) {
+  mediaQuery.addListener(applyThemeAuto);
 }
-
-function storeTheme(theme) {
-  try {
-    localStorage.setItem('theme', theme);
-  } catch (e) {
-    // ignore
-  }
-}
-
-function initTheme() {
-  const stored = getStoredTheme();
-  if (stored) {
-    applyTheme(stored);
-    return;
-  }
-  // No stored preference — follow system
-  const systemDark = mediaQuery.matches;
-  applyTheme(systemDark ? 'dark' : 'light');
-}
-
-if (themeToggle) {
-  themeToggle.addEventListener('click', () => {
-    const current = getStoredTheme() || (mediaQuery.matches ? 'dark' : 'light');
-    const next = current === 'dark' ? 'light' : 'dark';
-    applyTheme(next);
-    storeTheme(next);
-  });
-}
-
-// Listen for system preference changes — only apply if user hasn't set a preference
-mediaQuery.addEventListener?.('change', (e) => {
-  if (!getStoredTheme()) {
-    applyTheme(e.matches ? 'dark' : 'light');
-  }
-});
-
-// Initialize on load
-initTheme();

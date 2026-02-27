@@ -152,26 +152,6 @@ nav {
 }
 
 /* Theme toggle button */
-.theme-toggle {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  margin-left: 0.75rem;
-  background: transparent;
-  border: 1px solid transparent;
-  color: var(--text);
-  cursor: pointer;
-  border-radius: 6px;
-  font-size: 16px;
-}
-.theme-toggle:hover {
-  background: rgba(255,255,255,0.03);
-  border-color: var(--border);
-}
-
-/* Slightly adjust hamburger icon color to follow variables */
 .hamburger span {
   background: var(--text);
 }
